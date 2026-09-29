@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 
 const heroImages = [
-  "/hero-1.jpg",
-  "/hero-2.jpg",
-  "/hero-3.jpg",
+  "/image1.png",
+  "/image2.png",
+  "/image3.png",
 ];
 
 export default function HeroImageBackground() {
