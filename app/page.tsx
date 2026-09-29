@@ -6,10 +6,6 @@ import { siteConfig } from "@/lib/site";
 
 export const dynamic = "force-dynamic";
 
-export const metadata = {
-  title: "Blessed | Products",
-};
-
 export default async function HomePage() {
   const [products, total] = await Promise.all([
     prisma.product.findMany({

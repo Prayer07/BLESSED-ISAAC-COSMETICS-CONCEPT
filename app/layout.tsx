@@ -12,8 +12,7 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: "Blessed",
-  description: "Blessed products",
+  title: "BLESSED ISAAC COSMETICS CONCEPT",
 };
 
 export default function RootLayout({
