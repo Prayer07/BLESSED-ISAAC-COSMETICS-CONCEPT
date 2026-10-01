@@ -5,6 +5,7 @@ import SiteFooter from "@/components/SiteFooter";
 
 import "./globals.css";
 import PublicHeader from "@/components/PublicHeader";
+import { CartProvider } from "@/components/CartProvider";
 
 const manrope = Manrope({
   variable: "--font-manrope",
@@ -23,10 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} font-sans antialiased`}>
-        <PublicHeader />
-
-        {children}
-
+        <CartProvider>
+          <PublicHeader />
+          {children}
+        </CartProvider>
         <SiteFooter />
       </body>
     </html>

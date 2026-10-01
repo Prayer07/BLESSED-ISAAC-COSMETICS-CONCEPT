@@ -11,7 +11,7 @@ export default async function HomePage() {
     prisma.product.findMany({
       orderBy: { createdAt: "desc" },
       take: 3,
-      select: { id: true, name: true, price: true, image: true },
+      select: { id: true, name: true, price: true, image: true, inStock: true },
     }),
     prisma.product.count(),
   ]);

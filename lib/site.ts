@@ -14,18 +14,18 @@ export function whatsappLink(message: string) {
   return `https://wa.me/${siteConfig.whatsapp}?text=${encodeURIComponent(message)}`;
 }
 
-export function orderLink(product: { id: string; name: string; price: number }) {
+type OrderItem = { id: string; name: string; price: number; qty: number };
+
+export function orderLink(items: OrderItem[]) {
   const base = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const total = items.reduce((sum, i) => sum + i.price * i.qty, 0);
 
-  const lines = [
-    "Hello, I want to order this product:",
-    "",
-    `*${product.name}*`,
-    `Price: ${formatNaira(product.price)}`,
-  ];
-
-  // lets the owner open the exact product (and see the picture)
-  if (base) lines.push("", `${base}/products/${product.id}`);
+  const lines = ["Hello, I want to order:", ""];
+  items.forEach((i, n) => {
+    lines.push(`${n + 1}. *${i.name}* x${i.qty} - ${formatNaira(i.price * i.qty)}`);
+    if (base) lines.push(`   ${base}/products/${i.id}`);
+  });
+  lines.push("", `Total: ${formatNaira(total)}`);
 
   return whatsappLink(lines.join("\n"));
 }

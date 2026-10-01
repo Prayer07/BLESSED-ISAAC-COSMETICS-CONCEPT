@@ -19,7 +19,7 @@ export default async function ProductsPage({
   const products = await prisma.product.findMany({
     where: q ? { name: { contains: q, mode: "insensitive" } } : undefined,
     orderBy: { createdAt: "desc" },
-    select: { id: true, name: true, price: true, image: true },
+    select: { id: true, name: true, price: true, image: true, inStock: true },
   });
 
   return (

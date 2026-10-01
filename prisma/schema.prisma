@@ -23,6 +23,7 @@ model Product {
   name      String   @unique
   price     Int
   image     String
+  inStock   Boolean  @default(true)
   users     User[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

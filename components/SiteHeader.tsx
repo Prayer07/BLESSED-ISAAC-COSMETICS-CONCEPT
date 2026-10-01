@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteConfig } from "@/lib/site";
+import CartLink from "./CartLink";
 
 export default function SiteHeader() {
   return (
@@ -15,6 +16,7 @@ export default function SiteHeader() {
           <Link href="/products" className="hover:text-[#151814]">
             Products
           </Link>
+          <CartLink/>
         </nav>
       </div>
     </header>

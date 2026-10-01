@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { formatNaira } from "@/lib/format";
-import { orderLink } from "@/lib/site";
+import AddToCart from "@/components/AddToCart";
 
 export const dynamic = "force-dynamic";
 
@@ -55,14 +55,15 @@ export default async function ProductPage({ params }: Props) {
               {formatNaira(product.price)}
             </p>
 
-            <a
-              href={orderLink(product)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center justify-center rounded-lg bg-[#25D366] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1EBE5A]"
-            >
-              Order on WhatsApp
-            </a>
+            <AddToCart
+              product={{
+                id: product.id,
+                name: product.name,
+                price: product.price,
+                image: product.image,
+                inStock: product.inStock,
+              }}
+            />
             <p className="mt-3 text-xs text-[#77776F]">
               You&apos;ll be taken to WhatsApp to confirm your order with the seller.
             </p>

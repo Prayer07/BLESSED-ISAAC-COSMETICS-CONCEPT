@@ -4,7 +4,7 @@ import { jwtVerify } from "jose";
 const secret = new TextEncoder().encode(process.env.JWT_ACCESS_SECRET);
 
 const PUBLIC_ROUTES = ["/", "/login"];
-const PUBLIC_PREFIXES = ["/products"];
+const PUBLIC_PREFIXES = ["/products", "/cart"];
 const ADMIN_ROUTES = ["/admin"];
 
 export async function proxy(req: NextRequest) {

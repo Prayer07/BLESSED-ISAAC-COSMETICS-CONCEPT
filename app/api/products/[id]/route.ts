@@ -30,7 +30,7 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     return NextResponse.json({ error: "Invalid form data" }, { status: 400 });
   }
 
-  const data: { name?: string; price?: number; image?: string } = {};
+  const data: { name?: string; price?: number; image?: string; inStock?: boolean } = {};
 
   const name = form.get("name")?.toString().trim();
   if (name) data.name = name;
@@ -43,6 +43,8 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     data.price = price;
   }
 
+  if (form.has("inStock")) data.inStock = form.get("inStock") === "true";
+  
   const image = form.get("image");
   if (image instanceof File && image.size > 0) {
     try {

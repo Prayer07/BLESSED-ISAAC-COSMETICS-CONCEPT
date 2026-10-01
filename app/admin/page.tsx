@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 export default async function AdminPage() {
   const products = await prisma.product.findMany({
     orderBy: { createdAt: "desc" },
-    select: { id: true, name: true, price: true, image: true },
+    select: { id: true, name: true, price: true, image: true, inStock: true },
   });
 
   return <ProductsManager products={products} />;

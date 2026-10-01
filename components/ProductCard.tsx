@@ -13,8 +13,15 @@ export default function ProductCard({ product }: { product: Product }) {
         <img
           src={product.image}
           alt={product.name}
-          className="aspect-square w-full object-cover transition duration-300 group-hover:scale-[1.03]"
+          className={`aspect-square w-full object-cover transition duration-300 group-hover:scale-[1.03] ${
+            product.inStock ? "" : "opacity-60 grayscale"
+          }`}
         />
+        {!product.inStock && (
+          <span className="absolute left-2 top-2 rounded-full bg-[#151814] px-2.5 py-1 text-[11px] font-semibold text-white">
+            Out of stock
+          </span>
+        )}
       </div>
 
       <div className="p-3 sm:p-4">

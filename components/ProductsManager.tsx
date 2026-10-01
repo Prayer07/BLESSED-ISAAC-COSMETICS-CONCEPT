@@ -43,6 +43,17 @@ export default function ProductsManager({ products }: { products: Product[] }) {
     }
   }
 
+  async function toggleStock(p: Product) {
+    const fd = new FormData();
+    fd.append("inStock", String(!p.inStock));
+    try {
+      await api(`/api/products/${p.id}`, { method: "PATCH", body: fd });
+      router.refresh();
+    } catch (err) {
+      alert(err instanceof Error ? err.message : "Could not update stock");
+    }
+  }
+
   return (
     <>
       <div className="mb-6 flex items-center justify-between">
@@ -81,7 +92,7 @@ export default function ProductsManager({ products }: { products: Product[] }) {
                 <img
                   src={p.image}
                   alt={p.name}
-                  className="aspect-square w-full object-cover"
+                  className={`aspect-square w-full object-cover ${p.inStock ? "" : "opacity-60 grayscale"}`}
                 />
               </div>
 
@@ -92,6 +103,23 @@ export default function ProductsManager({ products }: { products: Product[] }) {
                 <p className="mt-1 text-base font-bold text-[#173B2A]">
                   {formatNaira(p.price)}
                 </p>
+
+                <div className="mt-2 flex items-center justify-between gap-2">
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
+                      p.inStock ? "bg-green-100 text-green-800" : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {p.inStock ? "In stock" : "Out of stock"}
+                  </span>
+
+                  <button
+                    onClick={() => toggleStock(p)}
+                    className="rounded-lg border border-[#D8D3C7] px-2.5 py-1 text-xs font-medium transition hover:bg-[#E8E3D8]"
+                  >
+                    {p.inStock ? "Mark out of stock" : "Mark in stock"}
+                  </button>
+                </div>
 
                 <div className="mt-3 flex gap-2">
                   <button
